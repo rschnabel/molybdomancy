@@ -1,26 +1,176 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Virtuelles Bleigießen</title>
         <style>
             html, body {
                 height: 100%;
                 margin: 0;
                 }
             #c {
-            width: 100%;
-            height: 80%;
-            display: block;
+                width: 100%;
+                height: 80%;
+                display: block;
             }
             #s {
                 width: 100%;
             }
+            #btnMake {
+                font-size: 35px;
+            }
+            #grd {
+                height: 100%;
+                width: 100%;
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: min-content min-content auto
+            }
+            #txt {
+                grid-row: 1;
+            }
+            .github-fork-ribbon {
+            width: 12.1em;
+            height: 12.1em;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            right: 0;
+            z-index: 9999;
+            pointer-events: none;
+            font-size: 13px;
+            text-decoration: none;
+            text-indent: -999999px;
+            }
+
+            .github-fork-ribbon.fixed {
+            position: fixed;
+            }
+
+            .github-fork-ribbon:hover, .github-fork-ribbon:active {
+            background-color: rgba(0, 0, 0, 0.0);
+            }
+
+            .github-fork-ribbon:before, .github-fork-ribbon:after {
+            /* The right and left classes determine the side we attach our banner to */
+            position: absolute;
+            display: block;
+            width: 15.38em;
+            height: 1.54em;
+
+            top: 3.23em;
+            right: -3.23em;
+
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+            }
+
+            .github-fork-ribbon:before {
+            content: "";
+
+            /* Add a bit of padding to give some substance outside the "stitching" */
+            padding: .38em 0;
+
+            /* Set the base colour */
+            background-color: #a00;
+
+            /* Set a gradient: transparent black at the top to almost-transparent black at the bottom */
+            background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.15)));
+            background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+            background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+            background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+            background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+
+            /* Add a drop shadow */
+            -webkit-box-shadow: 0 .15em .23em 0 rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 .15em .23em 0 rgba(0, 0, 0, 0.5);
+            box-shadow: 0 .15em .23em 0 rgba(0, 0, 0, 0.5);
+
+            pointer-events: auto;
+            }
+
+            .github-fork-ribbon:after {
+            /* Set the text from the data-ribbon attribute */
+            content: attr(data-ribbon);
+
+            /* Set the text properties */
+            color: #fff;
+            font: 700 1em "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 1.54em;
+            text-decoration: none;
+            text-shadow: 0 -.08em rgba(0, 0, 0, 0.5);
+            text-align: center;
+            text-indent: 0;
+
+            /* Set the layout properties */
+            padding: .15em 0;
+            margin: .15em 0;
+
+            /* Add "stitching" effect */
+            border-width: .08em 0;
+            border-style: dotted;
+            border-color: #fff;
+            border-color: rgba(255, 255, 255, 0.7);
+            }
+
+            .github-fork-ribbon.left-top, .github-fork-ribbon.left-bottom {
+            right: auto;
+            left: 0;
+            }
+
+            .github-fork-ribbon.left-bottom, .github-fork-ribbon.right-bottom {
+            top: auto;
+            bottom: 0;
+            }
+
+            .github-fork-ribbon.left-top:before, .github-fork-ribbon.left-top:after, .github-fork-ribbon.left-bottom:before, .github-fork-ribbon.left-bottom:after {
+            right: auto;
+            left: -3.23em;
+            }
+
+            .github-fork-ribbon.left-bottom:before, .github-fork-ribbon.left-bottom:after, .github-fork-ribbon.right-bottom:before, .github-fork-ribbon.right-bottom:after {
+            top: auto;
+            bottom: 3.23em;
+            }
+
+            .github-fork-ribbon.left-top:before, .github-fork-ribbon.left-top:after, .github-fork-ribbon.right-bottom:before, .github-fork-ribbon.right-bottom:after {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            }
         </style>
+        <!-- START COPYING HERE -->
+        <link rel="stylesheet" href="gh-fork-ribbon.css">
+        <!-- END COPYING HERE -->
     </head>
     <body>
+        <a class="github-fork-ribbon right-top" href="https://github.com/rschnabel/molybdomancy"
+            data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+        <div id="grd">
+        <div id="txt">
         <h1>Bleigießen</h1>
+        <h3>Diese Seite simuliert Bleigießen online, damit man diesen Spaß
+            auch zum Jahreswechsel 2020/2021 z.B. im Rahmen einer Videokonferenz haben kann.</h3>
+        <h2>Anleitung:</h2>
+        <h3>Den Button "Form gießen" drücken, um eine zufällige Form zu erzeugen
+            (etwas Geduld, das kann einige Sekunden dauern).
+            Anschließend kann diese Form solange gedreht und verschoben werden,
+            bis man eine Figur erkennt. Anhand dieser Figur kann dann das "Wahrsagen" erfolgen.
+            Einige Interpretationen können z.B. <a href="https://www.bleigiessen.de/">hier</a> gefunden werden.
+            Eine Beschreibung des Brauchs gibt es <a href="https://de.wikipedia.org/wiki/Bleigie%C3%9Fen">hier</a>.</h3>
+        </div>
         <button id="btnMake">Form gießen</button>
         <canvas id="c"></canvas>
-        <iframe src="https://www.bleigiessen.de/suche.php" id="s"></iframe>
+        </div>
         <script type="module">
             // Find the latest version by visiting https://unpkg.com/three. The URL will
             // redirect to the newest stable release.
